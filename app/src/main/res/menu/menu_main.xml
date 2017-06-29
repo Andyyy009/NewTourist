@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.andyyy.touristapp.MonumentOverviewActivity">
+    <item
+        android:id="@+id/action_quit"
+        android:orderInCategory="100"
+        android:title="@string/ukon_it"
+        app:showAsAction="never" />
+</menu>
