@@ -97,4 +97,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "UPDATE " + Table_name + " SET " + Col_2 + " = '" + Nazev + "', " + Col_3 + " = '" + Mesto + "', " + Col_5 + " = '" + Datum + "', " + Col_6 + " = '" + Poznamka + "' WHERE " + Col_1 + " = '" + id + "'";
         db.execSQL(query);
     }
+
+    public void updatePhoto(String id, String Photo)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+         String query = "UPDATE " + Table_name + " SET " + Col_4 + " = '" + Photo + "' WHERE " + Col_1 + " = '" + id + "'";
+        db.execSQL(query);
+    }
 }

@@ -67,22 +67,11 @@ public class MonumentDetailActivity extends AppCompatActivity {
         buttonTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*File imageStorageFolder = new File(Environment.getExternalStorageDirectory()+ File.separator+"AppFotky");
-                if (!imageStorageFolder.exists())
-                {
-                    imageStorageFolder.mkdirs();
-                    Log.d("folder created" , "Folder created at: "+imageStorageFolder.toString());
-                }
-                String timeStamp = DateFormat.getDateTimeInstance().format(new Date());
-                cesta = Environment.getExternalStorageDirectory()+File.separator + "AppFotky/" + timeStamp +".jpg";
-                File file = new File(cesta);
-                Log.e("cesta",cesta);
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(intent, CAPTURE_IMAGE_FULLSIZE_ACTIVITY_REQUEST_CODE);*/
 
                 Intent intent = new Intent(MonumentDetailActivity.this, PhotoActivity.class);
+                intent.putExtra("ID", ID);
                 startActivity(intent);
+
             }
         });
 
