@@ -27,7 +27,7 @@ public class Retrieve extends AsyncTask<String, Void, String>{
         Log.d("zkouska", position);
 
         try {
-            URL url= new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+position+"&radius=50000&types=museum,church,hindu_temple,synagogue,point_of_interest&key=AIzaSyDtOI-3tRfg7suOOKWHqoK3Ucwb-ksg3uc");
+            URL url= new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+position+ "&radius=50000&types=museum&key=AIzaSyDtOI-3tRfg7suOOKWHqoK3Ucwb-ksg3uc");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
