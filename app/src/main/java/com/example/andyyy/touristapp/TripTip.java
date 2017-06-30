@@ -65,19 +65,20 @@ import java.util.concurrent.ExecutionException;
                         Log.i("Test", result);
                         if (!result.isEmpty()) {
                             JSONObject main = new JSONObject(result);
-                            if(main.getString("status") == "OK"){
+                          //  if(main.getString("status") == "OK"){
                                 JSONArray results = main.getJSONArray("results");
                                 for(int i = 0; i < results.length(); i++){
+                                    Log.i("Testloc", "1");
                                     MarkerOptions mOptions = new MarkerOptions();
                                     JSONObject obj = results.getJSONObject(i);
                                     JSONObject geometry = obj.getJSONObject("geometry");
                                     JSONObject locationj = geometry.getJSONObject("location");
+
                                     mOptions.position(new LatLng(locationj.getDouble("lat"), locationj.getDouble("lng")));
                                     String name = obj.getString("name");
-
                                     mOptions.title(name);
                                     mMap.addMarker(mOptions);
-                                }
+                             //   }
                             }
                         }
 
@@ -121,20 +122,20 @@ import java.util.concurrent.ExecutionException;
                         Log.i("Test", result);
                         if (!result.isEmpty()) {
                             JSONObject main = new JSONObject(result);
-                            if(main.getString("status") == "OK"){
+                           // if(main.getString("status") == "OK"){
                                 JSONArray results = main.getJSONArray("results");
                                 for(int i = 0; i < results.length(); i++){
+                                    Log.i("Testloc", "1");
                                     MarkerOptions mOptions = new MarkerOptions();
                                     JSONObject obj = results.getJSONObject(i);
                                     JSONObject geometry = obj.getJSONObject("geometry");
                                     JSONObject locationj = geometry.getJSONObject("location");
+                                    Log.i("Testloc", locationj.toString());
                                     mOptions.position(new LatLng(locationj.getDouble("lat"), locationj.getDouble("lng")));
-
                                     String name = obj.getString("name");
-                                    Log.i("Test", name);
                                     mOptions.title(name);
                                     mMap.addMarker(mOptions);
-                                }
+                               // }
                             }
                         }
                     } catch (InterruptedException e) {
