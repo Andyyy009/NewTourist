@@ -2,6 +2,7 @@ package com.example.andyyy.touristapp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -30,7 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     LocationManager locationManager;
-
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        editText = (EditText) findViewById(R.id.editTextSearchOnMap);
+
+        if (getIntent() != null){
+        Intent intent = getIntent();
+        String Nazev = intent.getStringExtra("EXTRA_MESSAGE");
+        editText.setText(Nazev);
+        }
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -129,7 +137,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onButtonSearch(View view){
-        EditText editText = (EditText) findViewById(R.id.editTextSearchOnMap);
         String location = editText.getText().toString();
         List<Address> addressList = null;
         if(location != null || !location.equals(""))

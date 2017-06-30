@@ -72,4 +72,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor data = db.rawQuery("SELECT * FROM " + Table_name + " WHERE ID = " + id , null);
         return data;
     }
+
+    public void DeleteRow(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + Table_name + " WHERE ID = " + id;
+        //db.rawQuery("DELETE FROM " + Table_name + " WHERE ID = " + id , null);
+        db.execSQL(query);
+    }
+
+    public Cursor getItemID(String Nazev){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + Col_1 + " FROM " + Table_name + " WHERE " + Col_2 + " = '" + Nazev + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public void updateRow(String id, String Nazev, String Mesto, String Datum, String Poznamka)
+  //  public void updateRow(String id, String Nazev, String Mesto)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+       // String query = "UPDATE " + Table_name + " SET " + Col_2 + " = '" + Nazev + "' " + Col_3 +
+        //        " = '" + Mesto + "' " + Col_5 + " = '" + Datum + "' " + Col_6 + " = '" + Poznamka + "' WHERE " + Col_1 + " = '" + id + "'";
+        String query = "UPDATE " + Table_name + " SET " + Col_2 + " = '" + Nazev + "', " + Col_3 + " = '" + Mesto + "', " + Col_5 + " = '" + Datum + "', " + Col_6 + " = '" + Poznamka + "' WHERE " + Col_1 + " = '" + id + "'";
+        db.execSQL(query);
+    }
 }

@@ -53,37 +53,42 @@ public class MonumentOverviewActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.listView);
-        listItemsID = new ArrayList<>();
+    //    listItemsID = new ArrayList<>();
         listItems = new ArrayList<>();
         final Cursor data = myDB.getListContents();
-        while (data.moveToNext()){
+        while (data.moveToNext()) {
 
-            listItems.add(data.getString(1) + " - " + data.getString(2));
-            listItemsID.add(data.getString(0));
-            listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listItems);
+           // listItems.add(data.getString(1) + " - " + data.getString(2));
+            listItems.add(data.getString(1));
+        //    listItemsID.add(data.getString(0));
+            listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listItems);
             listView.setAdapter(listAdapter);
+        }
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     // Toast.makeText(view.getContext(),adapter.getItem(position),Toast.LENGTH_SHORT).show();
+                    String nazev = listView.getItemAtPosition(position).toString();
+                    Cursor ID = myDB.getItemID(nazev);
+                    String itemID = null;
+                    while (ID.moveToNext()){
+                        itemID = ID.getString(0);
+                    }
                     Intent intent = new Intent(MonumentOverviewActivity.this, MonumentDetailActivity.class);
-                    String message = listAdapter.getItem(position).toString();
-                    intent.putExtra("EXTRA_MESSAGE", message);
-                    String ID = listItemsID.get(position);
-                    intent.putExtra("ID", ID);
-                    //Toast.makeText(MonumentOverviewActivity.this, test + " " + position + " " + id, Toast.LENGTH_LONG).show();
+                    //  String ID = listItemsID.get(position);
+                    intent.putExtra("ID", itemID);
                     startActivityForResult(intent, 0);
 
                 }
             });
-        }
+
 
         searchView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            searchView.setIconified(false);
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -94,6 +99,7 @@ public class MonumentOverviewActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String text) {
                 listAdapter.getFilter().filter(text);
+
                 return false;
             }
         });
@@ -117,7 +123,7 @@ public class MonumentOverviewActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+}
 
 
 
@@ -171,14 +177,5 @@ public class MonumentOverviewActivity extends AppCompatActivity {
         }
     }*/
 
-
-
-    public void initList() {
-
-    }
-    public void searchItem(String textToSearch) {
-
-    }
-}
 
 
