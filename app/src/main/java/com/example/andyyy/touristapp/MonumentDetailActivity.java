@@ -1,24 +1,12 @@
 package com.example.andyyy.touristapp;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.util.Date;
-
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
 
 
 public class MonumentDetailActivity extends AppCompatActivity {
@@ -32,16 +20,20 @@ public class MonumentDetailActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         Intent intent = getIntent();
-        String message = intent.getStringExtra("EXTRA_MESSAGE");
         String ID = intent.getStringExtra("ID");
-        TextView textView = (TextView) findViewById(R.id.textView);
-        final TextView textViewDate = (TextView) findViewById(R.id.textView4);
+        TextView textViewNazev = (TextView) findViewById(R.id.textViewNazev);
+        TextView textViewMesto = (TextView) findViewById(R.id.textViewMesto);
+        TextView textViewPoznamka = (TextView) findViewById(R.id.textViewPoznamka);
+        TextView textViewDatum = (TextView) findViewById(R.id.textViewDatum);
 
-        textView.setText(message);
+        //textViewNazev.setText(message);
         Cursor cursor = db.findByID(ID);
         cursor.moveToFirst();
        // Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
-        textViewDate.setText(cursor.getString(4));
+        textViewNazev.setText(cursor.getString(1));
+        textViewMesto.setText(cursor.getString(2));
+        textViewDatum.setText(cursor.getString(4));
+        textViewPoznamka.setText(cursor.getString(5));
 
     }
 
