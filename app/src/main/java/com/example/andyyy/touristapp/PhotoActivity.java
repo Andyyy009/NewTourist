@@ -39,37 +39,45 @@ public class PhotoActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         Intent intent = getIntent();
         final String ID = intent.getStringExtra("ID");
+
         Button buttonTakePhoto = (Button) findViewById(R.id.buttonTakePic);
         imageView = (ImageView) findViewById(R.id.imageView);
         final Cursor cursor = db.findByID(ID);
         cursor.moveToFirst();
 
         String nameOfPic = cursor.getString(3);
+        if (nameOfPic.equals("Ano")) {
+            String path1 = "sdcard/TouristApp/start.jpg";
+            imageView.setImageDrawable(Drawable.createFromPath(path1)); }
+        else {
         final String path = "sdcard/TouristApp/"+nameOfPic+".jpg";
         try {
             imageView.setImageDrawable(Drawable.createFromPath(path));
         } catch (Exception e) {
 
-        }
+        }}
 
 
         buttonTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intentclick = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 File file = getFile(ID);
                 db.updatePhoto(ID, ID);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(intent, CAM_REQUEST);
+                intentclick.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+
+                startActivityForResult(intentclick, CAM_REQUEST);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        String path = "sdcard/TouristApp/test.jpg";
-        imageView.setImageDrawable(Drawable.createFromPath(path));
+        super.onActivityResult(requestCode, resultCode, data);
+       // String path = "sdcard/TouristApp/start.jpg";
+       // imageView.setImageDrawable(Drawable.createFromPath(path));
+        finish();
+        startActivity(getIntent());
 
      /*  super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
